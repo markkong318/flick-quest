@@ -14,7 +14,7 @@ export default new class Bottle {
 
     console.log('[bottle] set object ' + obj.constructor.name)
 
-    this.map.set(obj.constructor.name, obj)
+    this.set(obj.constructor.name, obj)
   }
 
   getObject(obj) {
@@ -24,7 +24,7 @@ export default new class Bottle {
 
     console.log('[bottle] get object ' + obj.name)
 
-    return this.map.get(obj.name);
+    return this.get(obj.name);
   }
 
   set(key, vale) {
@@ -36,6 +36,10 @@ export default new class Bottle {
   get(key) {
     console.log('[bottle] get ' + key);
 
+    if (!this.map.has(key)) {
+      throw new Error(`Could not find ${key}`);
+    }
+
     return this.map.get(key);
   }
 
@@ -46,19 +50,16 @@ export default new class Bottle {
     return func;
   }
 
-  singleton(srcClass, init: Function = () => {}): any {
-    let obj;
-
+  singleton(srcClass): any {
     if (!srcClass.name) {
       throw new Error('Argument is not a class');
     }
 
     if (this.map.has(srcClass.name)) {
-      return;
+      throw new Error(`Key ${srcClass.name} is existed`);
     }
 
-    obj = new srcClass();
-    init(obj);
+    const obj = new srcClass();
     obj.init();
 
     console.log('[bottle] set singleton ' + obj.constructor.name);

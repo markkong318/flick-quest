@@ -1,19 +1,14 @@
-import bottle from './bottle';
-
 export class Controller {
   constructor() {
-    const proxy = new Proxy(this, {
-      get: function (oTarget, sKey) {
-        if (String(sKey).endsWith('Model') || String(sKey).endsWith('Controller') || String(sKey).endsWith('View')) {
-          if (typeof oTarget[sKey] !== 'function') {
-            throw new Error('Not a function during injection')
-          }
-          return oTarget[sKey]();
+    return new Proxy(this, {
+      get: function (oTarget, sKey, receiver) {
+        const descriptor = Object.getOwnPropertyDescriptor(oTarget, sKey);
+        if (descriptor?.value?.bottle) {
+          return descriptor.value();
         }
-        return oTarget[sKey];
+        return Reflect.get(oTarget, sKey, receiver);
       },
     });
-    return proxy;
   }
 
   init() {}

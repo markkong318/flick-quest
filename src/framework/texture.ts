@@ -1,76 +1,35 @@
 import * as PIXI from 'pixi.js';
 
 export class Texture {
-  private textures: Map<string, PIXI.Texture>;
+  private caches: Map<string, PIXI.Texture>;
 
   constructor() {
-    this.textures = new Map();
+    this.caches = new Map();
 
-    const proxy = new Proxy(this, {
+    return new Proxy(this, {
       get: function (oTarget, sKey, receiver) {
-        console.log(String(oTarget))
-        // const obj = Reflect.get(oTarget, sKey, receiver);
-        // if (obj.bottle) {
-        //   return obj();
-        // }
+        console.log('texture sKey: ' + String(sKey))
+
         const descriptor = Object.getOwnPropertyDescriptor(oTarget, sKey);
-        if (descriptor && descriptor.value && descriptor.value.bottle) {
+        if (descriptor?.value?.bottle) {
           return descriptor.value();
         }
 
-        // console.log(typeof obj)
-
-        // if (typeof obj !== 'function'){
-        //   return obj
-        // }
         const prototypeDescriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(oTarget), sKey)
-        // if (prototypeDescriptor.value) {
-        //   return obj;
-        // }
-        debugger
-
-        // if (prototypeDescriptor.value) {
-        //   if (prototypeDescriptor.value.bottle) {
-        //     return prototypeDescriptor.value();
-        //   }
-        //   // debugger
-        //   // if ()
-        // }
-
-
         if (prototypeDescriptor.get) {
-          if (oTarget.textures.has(String(sKey))) {
-            return oTarget.textures.get(String(sKey));
+          if (oTarget.caches.has(String(sKey))) {
+            return oTarget.caches.get(String(sKey));
           }
-          debugger
-          const tt = prototypeDescriptor.get.bind(receiver)();
-            //obj.bind(receiver)();
 
-          console.log(tt);
+          const obj = prototypeDescriptor.get.bind(receiver)();
+          oTarget.caches.set(String(sKey), obj);
 
-          oTarget.textures.set(String(sKey), tt);
-
-          return tt;
+          return obj;
         }
 
-        // obj = obj.bind(receiver)
-        // console.log(obj.bind(receiver))
-        // debugger
-
-        // const obj = oTarget[sKey];
-
-        // if (obj === undefined) {
-        //   throw new Error(`Not a valid variable ${String(sKey)} in ${oTarget.constructor.name}`);
-        // }
-
-        // oTarget.textures.set(String(sKey), obj);
-
-        // return tt;
         return Reflect.get(oTarget, sKey, receiver);
       },
     });
-
-    return proxy;
   }
 
   init() {
