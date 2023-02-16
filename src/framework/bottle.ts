@@ -56,7 +56,8 @@ export default new class Bottle {
     }
 
     if (this.map.has(srcClass.name)) {
-      throw new Error(`Key ${srcClass.name} is existed`);
+      console.log(`[bottle] set singleton ${srcClass.name}, skip`);
+      return this.map.get(srcClass.name);
     }
 
     const obj = new srcClass();

@@ -17,16 +17,46 @@ export class FlickerTexture extends Texture {
     console.log(this.renderer);
   }
 
-  get bbb() {
-    console.log('called bbbb');
+  get roundRect() {
     const g = new PIXI.Graphics();
-    g.beginFill(0xff0000);
-    g.drawRoundedRect(1, 1, 90, 50, 10);
+    g.beginFill(0xffffff);
+    g.drawRoundedRect(0, 0, 90, 50, 10);
     g.endFill();
 
-    console.log(this.renderer);
+    return this.renderer.generateTexture(g, PIXI.SCALE_MODES.LINEAR, 2);
+  }
 
-    const texture = this.renderer.generateTexture(g, PIXI.SCALE_MODES.LINEAR, 2);
-    return texture
+  get rect() {
+    const g = new PIXI.Graphics();
+    g.beginFill(0xffffff);
+    g.drawRect(0, 0, 94, 54);
+    g.endFill();
+
+    return this.renderer.generateTexture(g, PIXI.SCALE_MODES.LINEAR, 2);
+  }
+
+  get leftRoundRect() {
+    const g = new PIXI.Graphics();
+    g.beginFill(0xffffff);
+    g.drawRect(10, 0, 84, 54);
+
+    g.beginFill(0xffffff);
+    g.drawRoundedRect(0, 0, 94, 54, 10);
+
+    g.endFill();
+
+    return this.renderer.generateTexture(g, PIXI.SCALE_MODES.LINEAR, 2);
+  }
+
+  get rightRoundRect() {
+    return
+  }
+
+  get upRoundRect() {
+    return
+  }
+
+  get downRoundRect() {
+    return
   }
 }
