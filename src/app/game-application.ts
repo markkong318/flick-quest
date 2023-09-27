@@ -1,3 +1,4 @@
+import * as PIXI from 'pixi.js';
 import {GameView} from './view/game-view';
 import {Application} from '../framework/application';
 import {Size} from '../framework/size';
@@ -16,10 +17,13 @@ export class GameApplication extends Application {
   }
 
   public preload(): void {
-    this.loader
-      .load((loader, resources) => {
-        this.onAssetsLoaded();
-      });
+    // PIXI.Assets
+    //   .load((loader, resources) => {
+    //     this.onAssetsLoaded();
+    //   });
+    // const texturePromise = PIXI.Assets.load('examples/assets/bunny.png');
+
+    this.onAssetsLoaded()
   }
 
   public onAssetsLoaded(): void {

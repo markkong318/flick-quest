@@ -33,10 +33,7 @@ export class View extends PIXI.Container {
   }
 
   init() {
-  }
-
-  draw() {
-
+    console.log("init view")
   }
 
   initBackground() {

@@ -36,10 +36,13 @@ font.load()
       resolution: window.devicePixelRatio || 1,
       autoDensity: true,
     });
+
     document.body.appendChild(app.view);
 
     window.onresize = () => {
       // app.renderer.resize(window.innerWidth, window.innerHeight);
       // app.resizeView();
     };
+
+    globalThis.__PIXI_APP__ = app;
   });

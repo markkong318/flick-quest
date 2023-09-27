@@ -20,7 +20,7 @@ export class GameView extends View {
     this.flickerView.size = new Size(this.size.width, 300);
     this.flickerView.background = new Background(PIXI.Texture.WHITE, 0xd2d5da);
     this.flickerView.y = this.size.height - 500;
-    this.flickerView.draw();
+    this.flickerView.wwwww();
     this.addChild(this.flickerView);
   }
 }
