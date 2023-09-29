@@ -75,17 +75,20 @@ export class ButtonView extends View {
       // @ts-ignore
       const { isHit, area } = event;
 
+      for (let i = 0; i < this.floatViews.length; i++) {
+        this.floatViews[i]?.renderBoardPointerUp();
+      }
+
       if (isHit) {
         // TODO
         console.log('boardpointermove move in')
+        this.renderBoardPointerDown();
       } else {
         console.log('boardpointermove move out')
 
-        for (let i = 0; i < this.floatViews.length; i++) {
-          this.floatViews[i]?.renderBoardPointerUp();
-        }
-
         console.log("area: " + area)
+
+        this.renderBoardPointerUp();
 
         switch (area) {
           case 2:
@@ -110,6 +113,10 @@ export class ButtonView extends View {
     this.on('boardpointerup', (event) => {
       console.log('boardpointerup');
       this.renderBoardPointerUp();
+
+      for (let i = 0; i < this.floatViews.length; i++) {
+        this.floatViews[i]?.renderBoardPointerUp();
+      }
 
       // @ts-ignore
       const { isHit, area } = event;
