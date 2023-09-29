@@ -13,10 +13,14 @@ export class FlickerView extends View {
 
   private buttons: PIXI.Sprite[][];
 
-  private clickSprite: PIXI.Sprite;
+  private touchSprite: TouchSprite;
 
   constructor() {
     super();
+  }
+
+  public setTouchSprite(touchSprite: TouchSprite) {
+    this.touchSprite = touchSprite;
   }
 
   public wwwww() {
@@ -81,18 +85,10 @@ export class FlickerView extends View {
 
     bv2.initSubView();
 
-    let touch = new TouchSprite();
-    touch.width = this.width;
-    touch.height = this.height;
-    touch.interactive = true;
-
-    touch.register(bv1);
-    touch.register(bv2);
-    touch.register(bv3);
-    touch.register(bv4);
-    touch.register(bv5);
-
-    this.addChild(touch);
-
+    this.touchSprite.register(bv1);
+    this.touchSprite.register(bv2);
+    this.touchSprite.register(bv3);
+    this.touchSprite.register(bv4);
+    this.touchSprite.register(bv5);
   }
 }

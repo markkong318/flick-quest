@@ -10,6 +10,8 @@ export class TouchSprite extends PIXI.Sprite {
     private pointerDownTimestamp: number;
     private pointerUpTimestamp: number;
 
+    private baseView: View;
+
     constructor(texture?: Texture){
         super(texture);
 
@@ -64,13 +66,17 @@ export class TouchSprite extends PIXI.Sprite {
         });
     }
 
+    public setBaseView(view: View) {
+        this.baseView = view;
+    }
+
     public register(view: View) {
         this.views.push(view);
     }
 
     private checkCollision(event) {
         // console.log(event.data)
-        const {x, y} = this.parent.toLocal(event.global);
+        const {x, y} = this.baseView.toLocal(event.global);
 
         for (let i = 0; i < this.views.length; i ++) {
             const view = this.views[i];
