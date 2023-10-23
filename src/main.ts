@@ -37,6 +37,7 @@ font.load()
       autoDensity: true,
     });
 
+    // @ts-ignore
     document.body.appendChild(app.view);
 
     window.onresize = () => {

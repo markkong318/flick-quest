@@ -5,26 +5,27 @@ export default new class Bottle {
 
   constructor() {
     this.map = new Map<any, any>()
+
   }
 
-  setObject(obj) {
+  setObject(obj, key?: string) {
     if (obj.constructor.name === 'Function') {
       throw new Error('Argument is not a object');
     }
 
     console.log('[bottle] set object ' + obj.constructor.name)
 
-    this.set(obj.constructor.name, obj)
+    this.set(key ? key : obj.constructor.name, obj)
   }
 
-  getObject(obj) {
+  getObject(obj, key?: string) {
     if (!obj.name) {
       throw new Error('Argument is not a class');
     }
 
     console.log('[bottle] get object ' + obj.name)
 
-    return this.get(obj.name);
+    return this.get(key? key : obj.name);
   }
 
   set(key, vale) {
@@ -43,29 +44,34 @@ export default new class Bottle {
     return this.map.get(key);
   }
 
-  inject(srcClass): any {
-    const func = () => this.getObject(srcClass);
+  inject(srcClass: { new (...any): any }, options?: {key?: string}): any {
+    const {key} = options || {};
+
+    const func = () => this.getObject(srcClass, key);
     func.bottle = true;
 
     return func;
   }
 
-  singleton(srcClass): any {
+  singleton(srcClass: { new (...any): any }, options?: {key?: string, args?: any[]}): any {
+    const {key, args = []} = options || {};
+
     if (!srcClass.name) {
       throw new Error('Argument is not a class');
     }
 
-    if (this.map.has(srcClass.name)) {
+    if (this.map.has(key ? key : srcClass.name)) {
       console.log(`[bottle] set singleton ${srcClass.name}, skip`);
-      return this.map.get(srcClass.name);
+      return this.get(key ? key : srcClass.name);
     }
 
-    const obj = new srcClass();
-    obj.init();
+    // @ts-ignore
+    const obj = new srcClass(...args);
+    obj.initBottle && obj.initBottle();
 
     console.log('[bottle] set singleton ' + obj.constructor.name);
 
-    this.map.set(srcClass.name, obj);
+    this.set(key ? key : srcClass.name, obj);
 
     return obj;
   }

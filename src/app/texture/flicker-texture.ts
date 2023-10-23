@@ -10,17 +10,10 @@ export class FlickerTexture extends Texture {
     super();
   }
 
-  init() {
-    console.log('init...')
-
-    // console.log(this)
-    console.log(this.renderer);
-  }
-
   get roundRect() {
     const g = new PIXI.Graphics();
     g.beginFill(0xffffff);
-    g.drawRoundedRect(0, 0, 90, 50, 10);
+    g.drawRoundedRect(0, 0, 90, 70, 10);
     g.endFill();
 
     return this.renderer.generateTexture(g, PIXI.SCALE_MODES.LINEAR, 2);

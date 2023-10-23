@@ -33,15 +33,12 @@ export class GameApplication extends Application {
   public initScene(): void {
     bottle.setObject(this.renderer);
 
-    // this.peerModel = bottle.singleton(PeerModel);
-    // this.roomModel = bottle.singleton(RoomModel);
-
     this.storage = bottle.singleton(Storage);
 
     const viewWidth = 480;
     const viewHeight = this.getViewHeight(viewWidth);
 
-    this.gameView = new GameView();
+    this.gameView = bottle.singleton(GameView);
     this.gameView.size = new Size(viewWidth, viewHeight);
     this.gameView.init();
 

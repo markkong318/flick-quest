@@ -11,7 +11,7 @@ export class GridLayout {
         this.parent = parent;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-        this.padding = 10//padding;
+        this.padding = padding;
     }
 
     put(view, idxX, idxY) {
@@ -20,13 +20,8 @@ export class GridLayout {
         const width = (this.parent.width / this.sizeX) - this.padding * 2;
         const height = (this.parent.height / this.sizeY) - this.padding * 2;
 
-        // const cellWidth = width / this.sizeX;
-        // const cellHeight = height / this.sizeY
         view.width = width;
         view.height = height;
-
-        // view.width = cellWidth;
-        // view.height = cellHeight;
 
         console.log("vw: " + view.width)
         console.log("vh: " + view.height)
@@ -34,7 +29,6 @@ export class GridLayout {
 
         console.log("cellWidth: " + width)
         console.log("cellHeight: " + height)
-        // console.log("scale: " + this.scale)
 
         const x =
             this.padding +

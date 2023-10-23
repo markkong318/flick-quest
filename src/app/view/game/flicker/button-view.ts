@@ -15,16 +15,22 @@ export class ButtonView extends View {
 
   private floatViews: FloatView[] = [];
 
-  private char: string = "あ"
-  private chars: string[] = ["い", "う", "え", "お"]; // left up right down
+  private char: string = "";
+
+  public static FLOAT_VIEW_LEFT: number = 0;
+  public static FLOAT_VIEW_UP: number = 1;
+  public static FLOAT_VIEW_RIGHT: number = 2;
+  public static FLOAT_VIEW_DOWN: number = 3;
 
   private isHit: boolean;
 
-  constructor() {
+  constructor(char: string) {
     super();
+
+    this.char = char;
   }
 
-  postInit() {
+  initBottle() {
     // this.borderSprite = new PIXI.Sprite(this.flickerTexture.roundRect);
     // this.borderSprite.x = 2;
     // this.borderSprite.y = 4;
@@ -43,7 +49,7 @@ export class ButtonView extends View {
     this.roundRectSprite.tint = 0xffffff;
     this.addChild(this.roundRectSprite);
 
-    this.charText = new PIXI.Text('あ');
+    this.charText = new PIXI.Text(this.char);
     this.charText.anchor.x = 0.5;
     this.charText.anchor.y = 0.5;
     this.charText.x = this.width / 2;
@@ -51,21 +57,13 @@ export class ButtonView extends View {
     this.charText.style.fontSize = '24px';
     this.addChild(this.charText);
 
-
-    for (let i = 0; i < 4; i++) {
-      const char = i + '';
-      this.chars.push(char);
-    }
-
-
-    // const subButtonViews: FloatView = [];
-
     // @ts-ignore
     this.on('boardpointerdown', (event) => {
       console.log('boardpointerdown ' + this.charText.text);
       this.renderBoardPointerDown();
-
       this.isHit = true;
+
+      this.showFloatViews();
     });
 
     // @ts-ignore
@@ -80,28 +78,25 @@ export class ButtonView extends View {
       }
 
       if (isHit) {
-        // TODO
         console.log('boardpointermove move in')
         this.renderBoardPointerDown();
       } else {
         console.log('boardpointermove move out')
 
-        console.log("area: " + area)
-
         this.renderBoardPointerUp();
 
         switch (area) {
           case 2:
-            this.floatViews[1]?.renderBoardPointerDown();
+            this.floatViews[ButtonView.FLOAT_VIEW_UP]?.renderBoardPointerDown();
             break;
           case 4:
-            this.floatViews[0]?.renderBoardPointerDown();
+            this.floatViews[ButtonView.FLOAT_VIEW_LEFT]?.renderBoardPointerDown();
             break;
           case 6:
-            this.floatViews[2]?.renderBoardPointerDown();
+            this.floatViews[ButtonView.FLOAT_VIEW_RIGHT]?.renderBoardPointerDown();
             break;
           case 8:
-            this.floatViews[3]?.renderBoardPointerDown();
+            this.floatViews[ButtonView.FLOAT_VIEW_DOWN]?.renderBoardPointerDown();
             break;
         }
       }
@@ -122,26 +117,25 @@ export class ButtonView extends View {
       const { isHit, area } = event;
 
       if (isHit) {
-        // send msg about the text
         console.log('send key:' + this.char);
       } else {
-        // send msg about the text
-        console.log("113area: " + area)
         switch (area) {
           case 2:
-            console.log('send key:' + this.chars[1]);
+            console.log('send key:' + this.floatViews[ButtonView.FLOAT_VIEW_UP].getChar());
             break;
           case 4:
-            console.log('send key:' + this.chars[0]);
+            console.log('send key:' + this.floatViews[ButtonView.FLOAT_VIEW_LEFT].getChar());
             break;
           case 6:
-            console.log('send key:' + this.chars[2]);
+            console.log('send key:' + this.floatViews[ButtonView.FLOAT_VIEW_RIGHT].getChar());
             break;
           case 8:
-            console.log('send key:' + this.chars[3]);
+            console.log('send key:' + this.floatViews[ButtonView.FLOAT_VIEW_DOWN].getChar());
             break;
         }
       }
+
+      this.hideFloatViews();
     });
 
     // @ts-ignore
@@ -151,61 +145,80 @@ export class ButtonView extends View {
     });
   }
 
-  initSubView() {
-    let floatView;
+  setFloatViews(floatViews: FloatView[]) {
+    this.floatViews = [];
 
-    // left
-    floatView = new FloatView();
-    floatView.postInit();
-    floatView.width = this.width;
-    floatView.height = this.height;
-    floatView.x = this.x - floatView.width;
-    floatView.y = this.y;
-    floatView.renderChar(this.chars[0]);
-    this.parent.addChild(floatView);
-    this.floatViews.push(floatView);
+    for (let i = 0; i < floatViews.length; i++) {
+      const floatView = floatViews[i];
 
-    // up
-    floatView = new FloatView();
-    floatView.postInit();
-    floatView.width = this.width;
-    floatView.height = this.height;
-    floatView.x = this.x;
-    floatView.y = this.y - floatView.height;
-    floatView.renderChar(this.chars[1]);
-    this.parent.addChild(floatView);
-    this.floatViews.push(floatView);
+      this.floatViews.push(floatView);
 
-    // right
-    floatView = new FloatView();
-    floatView.postInit();
-    floatView.width = this.width;
-    floatView.height = this.height;
-    floatView.x = this.x + floatView.width;
-    floatView.y = this.y;
-    floatView.renderChar(this.chars[2]);
-    this.parent.addChild(floatView);
-    this.floatViews.push(floatView);
+      if (!floatView) {
+        continue;
+      }
 
-    // down
-    floatView = new FloatView();
-    floatView.postInit();
-    floatView.width = this.width;
-    floatView.height = this.height;
-    floatView.x = this.x;
-    floatView.y = this.y + floatView.height;
-    floatView.renderChar(this.chars[3]);
-    this.parent.addChild(floatView);
-    this.floatViews.push(floatView);
+      this.parent.addChild(floatView);
+
+      switch (i) {
+        case ButtonView.FLOAT_VIEW_LEFT:
+          floatView.width = this.width;
+          floatView.height = this.height;
+          floatView.x = this.x - floatView.width;
+          floatView.y = this.y;
+          break;
+
+        case ButtonView.FLOAT_VIEW_UP:
+          floatView.width = this.width;
+          floatView.height = this.height;
+          floatView.x = this.x;
+          floatView.y = this.y - floatView.height;
+          break;
+
+        case ButtonView.FLOAT_VIEW_RIGHT:
+          floatView.width = this.width;
+          floatView.height = this.height;
+          floatView.x = this.x + floatView.width;
+          floatView.y = this.y;
+          break;
+
+        case ButtonView.FLOAT_VIEW_DOWN:
+          floatView.width = this.width;
+          floatView.height = this.height;
+          floatView.x = this.x;
+          floatView.y = this.y + floatView.height;
+          break;
+      }
+
+      floatView.visible = false;
+    }
+  }
+
+  hideFloatViews() {
+    for (let i = 0; i < this.floatViews.length; i++) {
+      const floatView = this.floatViews[i];
+
+      if (!floatView) {
+        continue;
+      }
+
+      floatView.visible = false;
+    }
+  }
+
+  showFloatViews() {
+    for (let i = 0; i < this.floatViews.length; i++) {
+      const floatView = this.floatViews[i];
+
+      if (!floatView) {
+        continue;
+      }
+
+      floatView.visible = true;
+    }
   }
 
   renderClickable(flg: boolean) {
     this.roundRectSprite.tint = flg ? 0xffffff : 0xb5b8bf;
-  }
-
-  renderChar(char: string) {
-    this.char = char;
-    this.charText.text = char;
   }
 
   renderBoardPointerDown() {

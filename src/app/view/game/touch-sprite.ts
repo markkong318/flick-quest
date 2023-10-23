@@ -1,7 +1,7 @@
 import * as PIXI from "pixi.js";
 import {Texture} from "@pixi/core";
-import {View} from "../../../../framework/view";
-import {ButtonView} from "./button-view";
+import {View} from "../../../framework/view";
+import {ButtonView} from "./flicker/button-view";
 
 export class TouchSprite extends PIXI.Sprite {
     private isDown: boolean = false;
@@ -11,6 +11,16 @@ export class TouchSprite extends PIXI.Sprite {
     private pointerUpTimestamp: number;
 
     private baseView: View;
+
+    public static TOUCH_LEFT_UP = 1;
+    public static TOUCH_CENTER_UP = 2;
+    public static TOUCH_RIGHT_UP = 3;
+    public static TOUCH_LEFT_MIDDLE = 4;
+    public static TOUCH_CENTER_MIDDLE = 5;
+    public static TOUCH_RIGHT_MIDDLE = 6;
+    public static TOUCH_LEFT_DOWN = 7;
+    public static TOUCH_CENTER_DOWN = 8;
+    public static TOUCH_RIGHT_DOWN = 8;
 
     constructor(texture?: Texture){
         super(texture);
@@ -98,23 +108,23 @@ export class TouchSprite extends PIXI.Sprite {
             // 1    2    3
             // 4 view(5) 6
             // 7    8    9
-            let area = 5;
+            let area = TouchSprite.TOUCH_CENTER_MIDDLE;
             if (x < view.x && y < view.y) {
-                area = 1
+                area = TouchSprite.TOUCH_LEFT_UP;
             } else if (x >= view.x && x <= view.x + view.width && y < view.y) {
-                area = 2;
+                area = TouchSprite.TOUCH_CENTER_UP;
             } else if (x > view.x + view.width && y < view.y) {
-                area = 3;
+                area = TouchSprite.TOUCH_RIGHT_UP;
             } else if (x < view.x && y >= view.y && y <= view.y + view.height) {
-                area = 4;
+                area = TouchSprite.TOUCH_LEFT_MIDDLE;
             } else if (x > view.x + view.width && y <= view.y + view.height) {
-                area = 6;
+                area = TouchSprite.TOUCH_RIGHT_MIDDLE;
             } else if (x < view.x && y > view.y + view.height) {
-                area = 7;
+                area = TouchSprite.TOUCH_LEFT_DOWN;
             } else if (x >= view.x && x <= view.x + view.width && y > view.y + view.height) {
-                area = 8;
+                area = TouchSprite.TOUCH_CENTER_DOWN;
             } else if (x > view.x + view.width && y > view.y + view.height) {
-                area = 9;
+                area = TouchSprite.TOUCH_RIGHT_DOWN;
             }
 
             if (event.type == 'pointerdown') {
