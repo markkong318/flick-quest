@@ -7,21 +7,29 @@ export class GridLayout {
     private sizeY: number;
     private padding: number;
 
-    constructor(parent, sizeX, sizeY, padding) {
+    private noResize: boolean;
+
+    constructor(parent: View, sizeX: number, sizeY: number, padding: number,
+                {noResize}: {noResize: boolean} = {noResize: false}) {
         this.parent = parent;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         this.padding = padding;
+
+        this.noResize = noResize;
     }
 
-    put(view, idxX, idxY) {
+    put(view: any, idxX: number, idxY: number) {
+
         this.parent.addChild(view)
 
         const width = (this.parent.width / this.sizeX) - this.padding * 2;
         const height = (this.parent.height / this.sizeY) - this.padding * 2;
 
-        view.width = width;
-        view.height = height;
+        if (!this.noResize) {
+            view.width = width;
+            view.height = height;
+        }
 
         console.log("vw: " + view.width)
         console.log("vh: " + view.height)

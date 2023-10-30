@@ -121,16 +121,16 @@ export class ButtonView extends View {
       } else {
         switch (area) {
           case 2:
-            console.log('send key:' + this.floatViews[ButtonView.FLOAT_VIEW_UP].getChar());
+            console.log('send key:' + this.floatViews[ButtonView.FLOAT_VIEW_UP]?.getChar());
             break;
           case 4:
-            console.log('send key:' + this.floatViews[ButtonView.FLOAT_VIEW_LEFT].getChar());
+            console.log('send key:' + this.floatViews[ButtonView.FLOAT_VIEW_LEFT]?.getChar());
             break;
           case 6:
-            console.log('send key:' + this.floatViews[ButtonView.FLOAT_VIEW_RIGHT].getChar());
+            console.log('send key:' + this.floatViews[ButtonView.FLOAT_VIEW_RIGHT]?.getChar());
             break;
           case 8:
-            console.log('send key:' + this.floatViews[ButtonView.FLOAT_VIEW_DOWN].getChar());
+            console.log('send key:' + this.floatViews[ButtonView.FLOAT_VIEW_DOWN]?.getChar());
             break;
         }
       }

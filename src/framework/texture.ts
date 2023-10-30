@@ -16,7 +16,7 @@ export class Texture {
         }
 
         const prototypeDescriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(oTarget), sKey)
-        if (prototypeDescriptor.get) {
+        if (prototypeDescriptor?.get) {
           if (oTarget.caches.has(String(sKey))) {
             return oTarget.caches.get(String(sKey));
           }
@@ -32,7 +32,7 @@ export class Texture {
     });
   }
 
-  init() {
+  initBottle() {
     // const names = Object.getOwnPropertyNames(Object.getPrototypeOf(this));
     // console.log(names);
   }

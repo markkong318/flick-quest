@@ -40,16 +40,4 @@ export class FlickerTexture extends Texture {
 
     return this.renderer.generateTexture(g, PIXI.SCALE_MODES.LINEAR, 2);
   }
-
-  get rightRoundRect() {
-    return
-  }
-
-  get upRoundRect() {
-    return
-  }
-
-  get downRoundRect() {
-    return
-  }
 }

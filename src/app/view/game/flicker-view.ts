@@ -5,9 +5,10 @@ import {Size} from '../../../framework/size';
 import {FlickerTexture} from '../../texture/flicker-texture';
 import bottle from '../../../framework/bottle';
 import {ButtonView} from './flicker/button-view';
-import {GridLayout} from "./flicker/grid-layout";
+import {GridLayout} from "./layout/grid-layout";
 import {TouchSprite} from "./touch-sprite";
 import {FloatView} from "./flicker/float-view";
+import {BattleTexture} from "../../texture/battle-texture";
 
 export class FlickerView extends View {
   private flickerTexture: FlickerTexture = bottle.inject(FlickerTexture);
