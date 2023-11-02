@@ -1,5 +1,3 @@
-import {View} from './view';
-
 export default new class Bottle {
   private map: Map<any, any>
 
@@ -8,7 +6,7 @@ export default new class Bottle {
 
   }
 
-  setObject(obj, key?: string) {
+  setObject(obj: any, key?: string) {
     if (obj.constructor.name === 'Function') {
       throw new Error('Argument is not a object');
     }
@@ -18,7 +16,7 @@ export default new class Bottle {
     this.set(key ? key : obj.constructor.name, obj)
   }
 
-  getObject(obj, key?: string) {
+  getObject(obj: any, key?: string) {
     if (!obj.name) {
       throw new Error('Argument is not a class');
     }

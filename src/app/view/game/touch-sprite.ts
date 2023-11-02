@@ -1,7 +1,5 @@
-import * as PIXI from "pixi.js";
-import {Texture} from "@pixi/core";
-import {View} from "../../../framework/view";
-import {ButtonView} from "./flicker/button-view";
+import * as PIXI from 'pixi.js';
+import {View} from '../../../framework/view';
 
 export class TouchSprite extends PIXI.Sprite {
     private isDown: boolean = false;
@@ -22,7 +20,7 @@ export class TouchSprite extends PIXI.Sprite {
     public static TOUCH_CENTER_DOWN = 8;
     public static TOUCH_RIGHT_DOWN = 8;
 
-    constructor(texture?: Texture){
+    constructor(texture?: PIXI.Texture){
         super(texture);
 
         this.interactive = true;

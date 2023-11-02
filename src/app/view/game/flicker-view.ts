@@ -1,14 +1,12 @@
 import * as PIXI from 'pixi.js';
 
 import {View} from '../../../framework/view';
-import {Size} from '../../../framework/size';
 import {FlickerTexture} from '../../texture/flicker-texture';
 import bottle from '../../../framework/bottle';
 import {ButtonView} from './flicker/button-view';
-import {GridLayout} from "./layout/grid-layout";
-import {TouchSprite} from "./touch-sprite";
-import {FloatView} from "./flicker/float-view";
-import {BattleTexture} from "../../texture/battle-texture";
+import {GridLayout} from './layout/grid-layout';
+import {TouchSprite} from './touch-sprite';
+import {FloatView} from './flicker/float-view';
 
 export class FlickerView extends View {
   private flickerTexture: FlickerTexture = bottle.inject(FlickerTexture);

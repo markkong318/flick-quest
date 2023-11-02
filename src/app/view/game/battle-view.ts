@@ -1,28 +1,27 @@
 import * as PIXI from 'pixi.js';
 
 import {View} from '../../../framework/view';
-import bottle from "../../../framework/bottle";
-import {FlickerTexture} from "../../texture/flicker-texture";
-import {BattleTexture} from "../../texture/battle-texture";
-import {GridLayout} from "./layout/grid-layout";
-import {EnemyGroupView} from "./battle/enemy-group-view";
-import {Size} from "../../../framework/size";
-import {Background} from "../../../framework/background";
-import {QuizGroupView} from "./battle/quiz-group-view";
-import {State} from "pixi.js";
-import {StateView} from "./battle/state-view";
+import bottle from '../../../framework/bottle';
+import {BattleTexture} from '../../texture/battle-texture';
+import {EnemyGroupView} from './battle/enemy-group-view';
+import {Size} from '../../../framework/size';
+import {Background} from '../../../framework/background';
+import {QuizGroupView} from './battle/quiz-group-view';
+import {StateView} from './battle/state-view';
+import {MessageView} from './battle/message-view';
 
 export class BattleView extends View {
   private battleTexture: BattleTexture = bottle.inject(BattleTexture);
 
-  private messageBackgroundSprite: PIXI.Sprite;
-  private messageText: PIXI.Text;
+  // private messageBackgroundSprite: PIXI.Sprite;
+  // private messageText: PIXI.Text;
+  private messageView: MessageView;
 
   private enemyGroupView: EnemyGroupView;
   private quizGroupView: QuizGroupView;
   private stateView: StateView;
 
-  private baseHeight = 400;
+  private baseHeight = 450;
   private baseY: number = 0;
 
   constructor() {
@@ -38,21 +37,29 @@ export class BattleView extends View {
     sp.x = 0;
     sp.y = this.baseY;
     sp.width = this.width;
-    sp.height = 450
+    sp.height = this.baseHeight;
     sp.tint = 0x555555
     this.addChild(sp)
 
-    this.messageBackgroundSprite = new PIXI.Sprite(this.battleTexture.messageRoundRect)
-    this.messageBackgroundSprite.x = (this.width - this.battleTexture.messageRoundRect.width) / 2;
-    this.messageBackgroundSprite.y = this.baseY;
-    this.addChild(this.messageBackgroundSprite)
+    // this.messageBackgroundSprite = new PIXI.Sprite(this.battleTexture.messageRoundRect)
+    // this.messageBackgroundSprite.x = (this.width - this.battleTexture.messageRoundRect.width) / 2;
+    // this.messageBackgroundSprite.y = this.baseY;
+    // this.addChild(this.messageBackgroundSprite)
+    //
+    // this.messageText = new PIXI.Text(">>>>>>>>");
+    // this.messageText.x = this.messageBackgroundSprite.x + 15;
+    // this.messageText.y = this.messageBackgroundSprite.y + 15;
+    // this.messageText.style.fontSize = '24px';
+    // this.messageText.style.fill = ['#ffffff']
+    // this.addChild(this.messageText);
 
-    this.messageText = new PIXI.Text(">>>>>>>>");
-    this.messageText.x = this.messageBackgroundSprite.x + 15;
-    this.messageText.y = this.messageBackgroundSprite.y + 15;
-    this.messageText.style.fontSize = '24px';
-    this.messageText.style.fill = ['#ffffff']
-    this.addChild(this.messageText);
+    this.messageView = bottle.singleton(MessageView);
+    this.messageView.size = new Size(this.size.width, 0);
+    this.messageView.background = new Background(PIXI.Texture.WHITE, 0x000000);
+    this.messageView.x = 0;
+    this.messageView.y = this.baseY;
+    this.messageView.initUI();
+    this.addChild(this.messageView);
 
     console.log("this.width: "+ this.width)
 
@@ -60,7 +67,7 @@ export class BattleView extends View {
     this.enemyGroupView.size = new Size(this.size.width, 150);
     this.enemyGroupView.background = new Background(PIXI.Texture.WHITE, 0x000000);
     this.enemyGroupView.x = 0;
-    this.enemyGroupView.y = this.messageText.y + 50;
+    this.enemyGroupView.y = this.messageView.y + this.messageView.height;
     this.enemyGroupView.initUI();
     this.addChild(this.enemyGroupView);
 

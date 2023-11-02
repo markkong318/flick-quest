@@ -5,7 +5,7 @@ import {Size} from '../../framework/size';
 import {FlickerView} from './game/flicker-view';
 import bottle from '../../framework/bottle';
 import {Background} from '../../framework/background';
-import {TouchSprite} from "./game/touch-sprite";
+import {TouchSprite} from './game/touch-sprite';
 import {BattleView} from "./game/battle-view";
 
 export class GameView extends View {

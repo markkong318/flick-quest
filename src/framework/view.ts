@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 
-import {Size} from "./size";
+import {Size} from './size';
 import {Background} from './background';
 
 export class View extends PIXI.Container {

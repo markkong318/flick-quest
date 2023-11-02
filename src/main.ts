@@ -17,9 +17,8 @@ declare global {
 
 document.title = packageJson.name;
 
-var font = new FontFaceObserver('lato-light')
+var font = new FontFaceObserver('jackeyfont')
 font.load()
-  .then(() => (new FontFaceObserver('lato')).load())
   .then(() => {
     window.PIXI = PIXI;
 

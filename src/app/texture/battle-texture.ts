@@ -10,7 +10,7 @@ export class BattleTexture extends Texture {
     super();
   }
 
-  get messageRoundRect() {
+  get messageRect() {
     const g = new PIXI.Graphics();
     g.beginFill(0x000000);
     g.lineStyle({width: 4, color: 0xffffff})
@@ -30,34 +30,22 @@ export class BattleTexture extends Texture {
     return this.renderer.generateTexture(g, {scaleMode: PIXI.SCALE_MODES.LINEAR, resolution: 2});
   }
 
-  // get roundRect() {
-  //   const g = new PIXI.Graphics();
-  //   g.beginFill(0xffffff);
-  //   g.drawRoundedRect(0, 0, 90, 70, 10);
-  //   g.endFill();
-  //
-  //   return this.renderer.generateTexture(g, PIXI.SCALE_MODES.LINEAR, 2);
-  // }
-  //
-  // get rect() {
-  //   const g = new PIXI.Graphics();
-  //   g.beginFill(0xffffff);
-  //   g.drawRect(0, 0, 94, 54);
-  //   g.endFill();
-  //
-  //   return this.renderer.generateTexture(g, PIXI.SCALE_MODES.LINEAR, 2);
-  // }
-  //
-  // get leftRoundRect() {
-  //   const g = new PIXI.Graphics();
-  //   g.beginFill(0xffffff);
-  //   g.drawRect(10, 0, 84, 54);
-  //
-  //   g.beginFill(0xffffff);
-  //   g.drawRoundedRect(0, 0, 94, 54, 10);
-  //
-  //   g.endFill();
-  //
-  //   return this.renderer.generateTexture(g, PIXI.SCALE_MODES.LINEAR, 2);
-  // }
+  get timeRect() {
+    const g = new PIXI.Graphics();
+    g.beginFill(0xffffff);
+    g.drawRect(0, 0, 10, 10);
+    g.endFill();
+
+    return this.renderer.generateTexture(g, {scaleMode: PIXI.SCALE_MODES.LINEAR, resolution: 2});
+  }
+
+  get stateRect() {
+    const g = new PIXI.Graphics();
+    g.beginFill(0x000000);
+    g.lineStyle({width: 4, color: 0xffffff})
+    g.drawRoundedRect(0, 0, 450, 75, 10);
+    g.endFill();
+
+    return this.renderer.generateTexture(g, {scaleMode: PIXI.SCALE_MODES.LINEAR, resolution: 2});
+  }
 }

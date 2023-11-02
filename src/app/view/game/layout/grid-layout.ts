@@ -1,4 +1,4 @@
-import {View} from "../../../../framework/view";
+import {View} from '../../../../framework/view';
 
 export class GridLayout {
     private parent: View;

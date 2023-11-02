@@ -33,7 +33,5 @@ export class Texture {
   }
 
   initBottle() {
-    // const names = Object.getOwnPropertyNames(Object.getPrototypeOf(this));
-    // console.log(names);
   }
 }

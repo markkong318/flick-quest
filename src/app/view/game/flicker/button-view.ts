@@ -3,7 +3,7 @@ import * as PIXI from 'pixi.js';
 import {View} from '../../../../framework/view';
 import {FlickerTexture} from '../../../texture/flicker-texture';
 import bottle from '../../../../framework/bottle';
-import {FloatView} from "./float-view";
+import {FloatView} from './float-view';
 
 export class ButtonView extends View {
   private flickerTexture: FlickerTexture = bottle.inject(FlickerTexture);
