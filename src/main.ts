@@ -11,7 +11,7 @@ import './assets/fonts/lato/style.css';
 
 declare global {
   interface Window {
-    PIXI:any;
+    PIXI: any;
   }
 }
 

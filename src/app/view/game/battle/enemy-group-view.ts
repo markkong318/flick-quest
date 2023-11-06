@@ -9,7 +9,7 @@ import {GridLayout} from '../layout/grid-layout';
 export class EnemyGroupView extends View {
   private battleTexture: BattleTexture = bottle.inject(BattleTexture);
 
-  private enemySprites: PIXI.Sprite[] = [];
+  private enemySprites: PIXI.AnimatedSprite[] = [];
 
   constructor() {
     super();
@@ -19,24 +19,22 @@ export class EnemyGroupView extends View {
     const layout = new GridLayout(this, 3, 1, 30);
 
     for (let i = 0; i < 3; i++) {
-      const enemySprite = new PIXI.Sprite(this.battleTexture.dummyEnemy);
+      const enemySprite = new PIXI.AnimatedSprite([this.battleTexture.dummyEnemy],);
       enemySprite.alpha = 0;
       layout.put(enemySprite, i, 0);
 
       this.enemySprites.push(enemySprite);
     }
-
-    // const sp = new PIXI.Sprite(PIXI.Texture.WHITE)
-    // sp.x = 0;
-    // sp.y = this.baseY;
-    // sp.width = this.width;
-    // sp.height = 400
-    // sp.tint = 0xff0000
-    // this.addChild(sp)
   }
 
-  setEnemy(id: number, texture: PIXI.Texture) {
-    this.enemySprites[id].texture = texture;
+  setEnemy(id: number, textures: PIXI.Texture[], speed: number) {
+    const width = this.enemySprites[id].width;
+    const height = this.enemySprites[id].height;
+
+    this.enemySprites[id].textures = textures;
+    this.enemySprites[id].animationSpeed = speed;
+    this.enemySprites[id].width = width;
+    this.enemySprites[id].height = height;
   }
 
   playHide(ids: number | number[]): gsap.core.Timeline {
@@ -48,6 +46,9 @@ export class EnemyGroupView extends View {
 
     for (let i = 0; i < ids.length; i++) {
       const sprite = this.enemySprites[ids[i]];
+
+      sprite.stop();
+
       timeline.to(sprite, {
         pixi: {
           duration: 0.5,
@@ -68,6 +69,9 @@ export class EnemyGroupView extends View {
 
     for (let i = 0; i < ids.length; i++) {
       const sprite = this.enemySprites[ids[i]];
+
+      sprite.play();
+
       timeline.to(sprite, {
         pixi: {
           duration: 0.5,

@@ -20,7 +20,7 @@ export class View extends PIXI.Container {
         }
         return Reflect.get(oTarget, sKey, receiver);
       },
-      set: function(oTarget, sKey, value, receiver) {
+      set: function (oTarget, sKey, value, receiver) {
         if (typeof value === 'object' && value !== null) {
           if (value.setView) {
             value.setView(oTarget);
@@ -37,7 +37,9 @@ export class View extends PIXI.Container {
   }
 
   initBackground() {
-    if (!this.size) { return; }
+    if (!this.size) {
+      return;
+    }
 
     this.backgroundSprite = new PIXI.Sprite(this.background._texture);
     this.backgroundSprite.width = this.size.width;

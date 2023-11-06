@@ -1,5 +1,4 @@
 import * as PIXI from 'pixi.js';
-import Bottle from '../../framework/bottle';
 import bottle from '../../framework/bottle';
 import {Texture} from '../../framework/texture';
 
@@ -16,7 +15,7 @@ export class FlickerTexture extends Texture {
     g.drawRoundedRect(0, 0, 90, 70, 10);
     g.endFill();
 
-    return this.renderer.generateTexture(g, PIXI.SCALE_MODES.LINEAR, 2);
+    return this.renderer.generateTexture(g, {scaleMode: PIXI.SCALE_MODES.LINEAR});
   }
 
   get rect() {
@@ -25,7 +24,7 @@ export class FlickerTexture extends Texture {
     g.drawRect(0, 0, 94, 54);
     g.endFill();
 
-    return this.renderer.generateTexture(g, PIXI.SCALE_MODES.LINEAR, 2);
+    return this.renderer.generateTexture(g, {scaleMode: PIXI.SCALE_MODES.LINEAR});
   }
 
   get leftRoundRect() {
@@ -38,6 +37,6 @@ export class FlickerTexture extends Texture {
 
     g.endFill();
 
-    return this.renderer.generateTexture(g, PIXI.SCALE_MODES.LINEAR, 2);
+    return this.renderer.generateTexture(g, {scaleMode: PIXI.SCALE_MODES.LINEAR});
   }
 }

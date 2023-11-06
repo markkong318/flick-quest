@@ -1,4 +1,3 @@
-import * as PIXI from 'pixi.js';
 import {GameView} from './view/game-view';
 import {Application} from '../framework/application';
 import {Size} from '../framework/size';

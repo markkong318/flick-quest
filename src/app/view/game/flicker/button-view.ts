@@ -71,7 +71,7 @@ export class ButtonView extends View {
       console.log('boardpointermove');
 
       // @ts-ignore
-      const { isHit, area } = event;
+      const {isHit, area} = event;
 
       for (let i = 0; i < this.floatViews.length; i++) {
         this.floatViews[i]?.renderBoardPointerUp();
@@ -114,7 +114,7 @@ export class ButtonView extends View {
       }
 
       // @ts-ignore
-      const { isHit, area } = event;
+      const {isHit, area} = event;
 
       if (isHit) {
         console.log('send key:' + this.char);

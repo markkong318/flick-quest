@@ -23,13 +23,13 @@ export default new class Bottle {
 
     console.log('[bottle] get object ' + obj.name)
 
-    return this.get(key? key : obj.name);
+    return this.get(key ? key : obj.name);
   }
 
   set(key, vale) {
     console.log('[bottle] set ' + key);
 
-    this.map.set(key,vale);
+    this.map.set(key, vale);
   }
 
   get(key) {
@@ -42,7 +42,7 @@ export default new class Bottle {
     return this.map.get(key);
   }
 
-  inject(srcClass: { new (...any): any }, options?: {key?: string}): any {
+  inject(srcClass: { new(...any): any }, options?: { key?: string }): any {
     const {key} = options || {};
 
     const func = () => this.getObject(srcClass, key);
@@ -51,7 +51,7 @@ export default new class Bottle {
     return func;
   }
 
-  singleton(srcClass: { new (...any): any }, options?: {key?: string, args?: any[]}): any {
+  singleton(srcClass: { new(...any): any }, options?: { key?: string, args?: any[] }): any {
     const {key, args = []} = options || {};
 
     if (!srcClass.name) {

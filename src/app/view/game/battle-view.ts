@@ -61,7 +61,7 @@ export class BattleView extends View {
     this.messageView.initUI();
     this.addChild(this.messageView);
 
-    console.log("this.width: "+ this.width)
+    console.log("this.width: " + this.width)
 
     this.enemyGroupView = bottle.singleton(EnemyGroupView);
     this.enemyGroupView.size = new Size(this.size.width, 150);
@@ -75,7 +75,7 @@ export class BattleView extends View {
     this.quizGroupView.size = new Size(this.size.width, 150);
     this.quizGroupView.background = new Background(PIXI.Texture.EMPTY, 0x000000);
     this.quizGroupView.x = 0;
-    this.quizGroupView.y = this.enemyGroupView.y + this.enemyGroupView.height ;
+    this.quizGroupView.y = this.enemyGroupView.y + this.enemyGroupView.height;
     this.quizGroupView.initUI();
     this.addChild(this.quizGroupView);
 
@@ -83,7 +83,7 @@ export class BattleView extends View {
     this.stateView.size = new Size(this.size.width, 50);
     this.stateView.background = new Background(PIXI.Texture.EMPTY, 0x000000);
     this.stateView.x = 0;
-    this.stateView.y = this.quizGroupView.y + this.quizGroupView.height ;
+    this.stateView.y = this.quizGroupView.y + this.quizGroupView.height;
     this.stateView.initUI();
     this.addChild(this.stateView);
   }

@@ -11,5 +11,6 @@ export class Controller {
     });
   }
 
-  init() {}
+  init() {
+  }
 }

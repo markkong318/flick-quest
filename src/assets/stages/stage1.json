@@ -1,0 +1,39 @@
+{
+  "events": [
+    {
+      "on": "start",
+      "messages": [
+        "aaaa",
+        "bbbb",
+        "あああああああ"
+      ]
+    },
+    {
+      "on": "kill",
+      "messages": [
+        "kill---"
+      ]
+    },
+    {
+      "on": "end",
+      "messages": [
+        "aaaa",
+        "bbbb"
+      ]
+    }
+  ],
+  "enemies": [
+    {
+      "spriteId": "",
+      "name": "aaa"
+    },
+    {
+      "spriteId": "",
+      "name": "bbb"
+    },
+    {
+      "spriteId": "",
+      "name": "ccc"
+    }
+  ]
+}

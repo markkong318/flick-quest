@@ -34,7 +34,9 @@ export class Background {
   }
 
   render() {
-    if (!this.view.size) { return; }
+    if (!this.view.size) {
+      return;
+    }
 
     if (!this.sprite) {
       this.sprite = new PIXI.Sprite(this._texture);

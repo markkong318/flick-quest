@@ -2,5 +2,6 @@ export class Model {
   constructor() {
   }
 
-  init() {}
+  init() {
+  }
 }
