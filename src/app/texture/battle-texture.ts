@@ -110,7 +110,7 @@ export class BattleTexture extends Texture {
 
     const textures = [];
     for (let i = 0; i < 10; i++) {
-      textures.push(new PIXI.Texture(baseTexture, new PIXI.Rectangle(16 * i, 0, 16, 16)));
+      textures.push(new PIXI.Texture(baseTexture, new PIXI.Rectangle(32 * i, 0, 32, 32)));
     }
 
     return [textures, 0.05];

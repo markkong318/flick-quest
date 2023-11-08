@@ -1,5 +1,5 @@
 {
-  "decrease": 0.5,
+  "decrease": 0.2,
   "events": [
     {
       "on": "start",
@@ -43,7 +43,7 @@
     },
     {
       "enemyId": "bloodLich",
-      "quiz": ""
+      "quiz": "うんをてんにまかせる"
     },
     {
       "enemyId": "",

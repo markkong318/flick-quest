@@ -1,5 +1,5 @@
 {
-  "decrease": 0.5,
+  "decrease": 0.2,
   "events": [
     {
       "on": "start",
@@ -33,22 +33,22 @@
       "messages": [
         "おめでとう",
         "クリアしました",
-        "次のステージを行きましょ！"
+        "次のステージを行きましょう！"
       ]
     }
   ],
   "enemies": [
     {
       "enemyId": "ancientFighter",
-      "quiz": "あ"
+      "quiz": "あああ"
     },
     {
       "enemyId": "ancientFighter",
-      "quiz": "あ"
+      "quiz": "かかか"
     },
     {
-      "enemyId": "bloodLich",
-      "quiz": "あ"
+      "enemyId": "ancientFighter",
+      "quiz": "さささ"
     }
   ]
 }

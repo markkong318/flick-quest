@@ -35,7 +35,7 @@ export class MainController extends Controller {
 
   private timeline: gsap.core.Timeline;
 
-  private timerId: number;
+  private timerId: number = -1;
 
   initStages() {
     this.stageModels.push(new StageModel(stage1json));
@@ -200,12 +200,17 @@ export class MainController extends Controller {
   }
 
   restartTimer() {
+    if (this.timerId != -1) {
+      return;
+    }
+
     this.timerId = setInterval(() => {
       this.gameModel.time -= this.gameModel.decrease;
 
       if (this.gameModel.time < 0) {
+        this.pauseTimer();
+
         this.gameModel.time = 0;
-        clearInterval(this.timerId);
 
         this.gameModel.life--;
 
@@ -233,17 +238,20 @@ export class MainController extends Controller {
           this.timeline
             .add(this.flikerView.playShake())
             .add(this.stateView.playLife(this.gameModel.life), '<')
-            .call(() => this.restoreTimer())
-            .call(() => this.restartTimer())
+            .call(() => {
+              this.restoreTimer()
+              this.restartTimer()
+            });
         }
       }
 
       this.stateView.playTime(this.gameModel.time);
-    }, 33);
+    }, 16);
   }
 
   pauseTimer() {
     clearInterval(this.timerId);
+    this.timerId = -1;
   }
 
   restoreTimer() {

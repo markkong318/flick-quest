@@ -31,14 +31,6 @@ export class BattleView extends View {
 
     this.baseY = (this.height - this.baseHeight) / 2;
 
-    // const sp = new PIXI.Sprite(PIXI.Texture.WHITE)
-    // sp.x = 0;
-    // sp.y = this.baseY;
-    // sp.width = this.width;
-    // sp.height = this.baseHeight;
-    // sp.tint = 0x555555
-    // this.addChild(sp)
-
     this.messageView = bottle.singleton(MessageView);
     this.messageView.size = new Size(this.size.width, 0);
     this.messageView.background = new Background(PIXI.Texture.WHITE, 0x000000);

@@ -15,6 +15,8 @@ export class GameView extends View {
   private touchSprite: TouchSprite;
   private maskView: MaskView;
 
+  public static FLICKER_VIEW_HEIGHT = 300;
+
   constructor() {
     super();
   }
@@ -23,7 +25,7 @@ export class GameView extends View {
     this.background = new Background(PIXI.Texture.WHITE, 0xf9f1e1);
 
     this.battleView = bottle.singleton(BattleView);
-    this.battleView.size = new Size(this.size.width, 600);
+    this.battleView.size = new Size(this.size.width, this.size.height - GameView.FLICKER_VIEW_HEIGHT);
     this.battleView.background = new Background(PIXI.Texture.WHITE, 0x000000);
     this.battleView.y = 0;
     this.battleView.initUI();
@@ -36,9 +38,9 @@ export class GameView extends View {
     this.addChild(this.touchSprite);
 
     this.flickerView = bottle.singleton(FlickerView);
-    this.flickerView.size = new Size(this.size.width, 300);
+    this.flickerView.size = new Size(this.size.width, GameView.FLICKER_VIEW_HEIGHT);
     this.flickerView.background = new Background(PIXI.Texture.WHITE, 0xd2d5da);
-    this.flickerView.y = this.size.height - 300;
+    this.flickerView.y = this.size.height - GameView.FLICKER_VIEW_HEIGHT;
     this.flickerView.initUI();
     this.addChild(this.flickerView);
 

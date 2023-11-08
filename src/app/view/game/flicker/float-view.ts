@@ -20,7 +20,7 @@ export class FloatView extends View {
   }
 
   initBottle() {
-    this.roundRectSprite = new PIXI.Sprite(this.flickerTexture.roundRect);
+    this.roundRectSprite = new PIXI.Sprite(this.flickerTexture.roundRectShadow);
     this.roundRectSprite.x = 0;
     this.roundRectSprite.y = 0;
     this.roundRectSprite.tint = 0xffffff;

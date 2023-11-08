@@ -18,6 +18,22 @@ export class FlickerTexture extends Texture {
     return this.renderer.generateTexture(g, {scaleMode: PIXI.SCALE_MODES.LINEAR});
   }
 
+  get roundRectShadow() {
+    const g = new PIXI.Graphics();
+
+    g.beginFill(0xAAAAAA);
+    g.drawRoundedRect(0, 2, 90, 70, 10);
+    g.endFill();
+
+    g.beginFill(0xffffff);
+    g.drawRoundedRect(0, 0, 90, 70, 10);
+    g.endFill();
+
+
+
+    return this.renderer.generateTexture(g, {scaleMode: PIXI.SCALE_MODES.LINEAR});
+  }
+
   get rect() {
     const g = new PIXI.Graphics();
     g.beginFill(0xffffff);

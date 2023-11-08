@@ -1,5 +1,5 @@
 {
-  "decrease": 0.5,
+  "decrease": 0.2,
   "events": [
     {
       "on": "start",
@@ -32,22 +32,22 @@
       "messages": [
         "おめでとう",
         "クリアしました",
-        "次のステージを行きましょ！"
+        "次のステージを行きましょう！"
       ]
     }
   ],
   "enemies": [
     {
       "enemyId": "carcassFeeder",
-      "quiz": "あ"
+      "quiz": "たたた"
     },
     {
       "enemyId": "carcassFeeder",
-      "quiz": "あ"
+      "quiz": "ななな"
     },
     {
       "enemyId": "carcassFeeder",
-      "quiz": "あ"
+      "quiz": "ははは"
     }
   ]
 }
