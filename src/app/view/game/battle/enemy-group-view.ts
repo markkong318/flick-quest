@@ -37,6 +37,7 @@ export class EnemyGroupView extends View {
     this.enemySprites[id].animationSpeed = speed;
     this.enemySprites[id].width = width;
     this.enemySprites[id].height = height;
+    this.enemySprites[id].alpha = 0;
   }
 
   playHide(ids: number | number[]): gsap.core.Timeline {

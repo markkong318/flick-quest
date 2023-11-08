@@ -55,10 +55,16 @@ export class MainController extends Controller {
 
   initSendKey() {
     rocket.on(EVENT_SEND_KEY, (key) => {
+      if (this.timerId == -1) {
+        console.log('timout, drop');
+        return;
+      }
+
       const quizs = this.gameModel.quizs;
+      const enemyIds = this.gameModel.enemyIds;
 
       for(let i = 0; i < quizs.length; i++) {
-        if (quizs[i].charAt(0) === key) {
+        if (enemyIds[i] != '' && quizs[i].charAt(0) === key) {
           quizs[i] = quizs[i].substring(1);
           break;
         }
@@ -66,6 +72,10 @@ export class MainController extends Controller {
 
       let isClear = true;
       for(let i = 0; i < quizs.length; i++) {
+        if (enemyIds[i] == '') {
+          continue;
+        }
+
         this.quizGroupView.setQuiz(i, quizs[i]);
 
         if (quizs[i].length == 0) {
@@ -82,11 +92,12 @@ export class MainController extends Controller {
       }
 
       if (isClear) {
+        console.log('clear')
         this.pauseTimer();
 
         this.timeline
-          .add(this.quizGroupView.playHide([0, 1, 2]), '<')
-          .add(this.maskView.playHide(), '<')
+          .add(this.maskView.playHide())
+          .add(this.quizGroupView.playHide([0, 1, 2]), '<');
 
         for(let i = 0; i < this.gameModel.successEvent.messages.length; i++) {
           const message = this.gameModel.successEvent.messages[i];
@@ -122,6 +133,7 @@ export class MainController extends Controller {
   }
 
   loadStage(stageId: number) {
+    console.log('loadStage')
     const stageModel = this.stageModels[stageId];
 
     this.gameModel.quizs = [];
@@ -164,6 +176,10 @@ export class MainController extends Controller {
   }
 
   play() {
+    console.log('play')
+
+    this.timeline.add(this.stateView.playLife(this.gameModel.life));
+
     for (let i = 0; i < this.gameModel.enemyIds.length; i++) {
       const enemyId = this.gameModel.enemyIds[i];
 
@@ -180,6 +196,7 @@ export class MainController extends Controller {
       const quiz = this.gameModel.quizs[i];
 
       if (!quiz) {
+        this.quizGroupView.setQuiz(i, '');
         continue;
       }
 
@@ -196,10 +213,13 @@ export class MainController extends Controller {
     this.timeline.add(this.enemyGroupView.playShow([0, 1, 2]), '>')
       .add(this.quizGroupView.playShow([0, 1, 2]), '<')
       .add(this.maskView.playShow(), '<')
-      .call(() => this.restartTimer());
+      .call(() => {
+        this.restartTimer()
+      });
   }
 
   restartTimer() {
+    console.log('restartTimer')
     if (this.timerId != -1) {
       return;
     }
@@ -208,7 +228,10 @@ export class MainController extends Controller {
       this.gameModel.time -= this.gameModel.decrease;
 
       if (this.gameModel.time < 0) {
+        console.log('time < 0')
         this.pauseTimer();
+
+        this.timeline.add(this.maskView.playHide());
 
         this.gameModel.time = 0;
 
@@ -218,7 +241,6 @@ export class MainController extends Controller {
           this.timeline
             .add(this.stateView.playLife(this.gameModel.life))
             .add(this.enemyGroupView.playPause([0, 1, 2]), '<')
-            .add(this.maskView.playHide(), '<');
 
           for (let i = 0; i < this.gameModel.failEvent.messages.length; i++) {
             const message = this.gameModel.failEvent.messages[i];
@@ -239,9 +261,10 @@ export class MainController extends Controller {
             .add(this.flikerView.playShake())
             .add(this.stateView.playLife(this.gameModel.life), '<')
             .call(() => {
-              this.restoreTimer()
-              this.restartTimer()
-            });
+              this.restoreTimer();
+              this.restartTimer();
+            })
+            .add(this.maskView.playShow(), '>')
         }
       }
 
@@ -250,13 +273,14 @@ export class MainController extends Controller {
   }
 
   pauseTimer() {
+    console.log('pauseTimer')
     clearInterval(this.timerId);
     this.timerId = -1;
   }
 
   restoreTimer() {
+    console.log('restoreTimer')
     this.gameModel.time = this.gameModel.maxTime;
-
     this.timeline.add(this.stateView.playTime(this.gameModel.time, 0.5), '>');
   }
 

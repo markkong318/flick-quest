@@ -11,14 +11,14 @@ export class MaskView extends View {
   }
 
   initUI() {
-    this.alpha = 0.8;
+    this.alpha = 0.5;
 
     this.waitText = new PIXI.Text("Please wait...");
     this.waitText.x = 0;
     this.waitText.y = 0;
     this.waitText.style.fontFamily = 'jackeyfont';
     this.waitText.style.fontSize = '24px';
-    this.waitText.style.fill = ['#ffffff']
+    this.waitText.style.fill = ['#ffffff'];
     this.addChild(this.waitText);
   }
 
@@ -35,15 +35,17 @@ export class MaskView extends View {
         },
       });
   }
+
   playHide(): gsap.core.Timeline {
     return gsap.timeline()
       .to(this, {
         pixi: {
           duration: 0.5,
-          alpha: 0.8,
+          alpha: 0.5,
         },
-        onCompleteParams: [this],
-        onComplete: function (target: View) {
+        onStartParams: [this],
+        onStart: function (target: View) {
+          console.log('play hide')
           target.interactive = true;
         },
       });

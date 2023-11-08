@@ -49,7 +49,6 @@ export class GameView extends View {
     this.maskView.background = new Background(PIXI.Texture.WHITE, 0x000000);
     this.maskView.x = this.flickerView.x;
     this.maskView.y = this.flickerView.y;
-    this.maskView.interactive = true;
     this.maskView.initUI();
     this.addChild(this.maskView);
 
