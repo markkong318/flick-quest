@@ -11,17 +11,19 @@ export class EnemyGroupView extends View {
 
   private enemySprites: PIXI.AnimatedSprite[] = [];
 
+  private layout: GridLayout;
+
   constructor() {
     super();
   }
 
   public initUI() {
-    const layout = new GridLayout(this, 3, 1, 30);
+    this.layout = new GridLayout(this, 3, 1, 30);
 
     for (let i = 0; i < 3; i++) {
       const enemySprite = new PIXI.AnimatedSprite([this.battleTexture.dummyEnemy],);
       enemySprite.alpha = 0;
-      layout.put(enemySprite, i, 0);
+      this.layout.put(enemySprite, i, 0);
 
       this.enemySprites.push(enemySprite);
     }
