@@ -49,7 +49,7 @@ export class GameApplication extends Application {
     this.resizeView();
 
     this.mainController = bottle.singleton(MainController);
-    this.mainController.start();
+    this.mainController.main();
   }
 
   public getViewHeight(viewWidth) {

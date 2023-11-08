@@ -1,24 +1,23 @@
 import {Model} from '../../framework/model';
 
-export class PeerModel extends Model {
-  public playerCells: number[][][];
-  public battleCells: number[][][];
+export class GameModel extends Model {
+  public quizs: string[] = [];
+  public enemyIds: string[] = [];
 
-  public boardId: string;
+  public startEvent: any = {};
+  public timeoutEvent: any = {};
+  public killEvent: any = {};
+  public failEvent: any = {};
+  public successEvent: any = {};
 
-  public idx: number = -1
-  public playerId: number = 0;
-  public count: number = -1;
+  public time: number = 0;
+  public maxTime: number = 0;
+  public life: number = 0;
 
-  public peerIds: string[] = [];
+  public decrease: number = 0;
 
-  public nextIdx: number;
-  public winnerIdx: number;
-  public winnerPositions: number[][] = [];
-
-  public host: boolean = false;
-  public start: boolean = false;
-  public login: boolean = false;
+  public stageId: number = 0;
+  public maxStageId: number = 0;
 
   constructor() {
     super();

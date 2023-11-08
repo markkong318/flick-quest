@@ -12,7 +12,7 @@ import bloodLich from '../../assets/images/BloodLichIdleSide.png';
 export class BattleTexture extends Texture {
   private renderer: PIXI.Renderer = bottle.inject(PIXI.Renderer);
 
-  public static ACIENT_FIGHTER = 'acientFighter';
+  public static ANCIENT_FIGHTER = 'ancientFighter';
   public static CARCASS_FEEDER = 'carcassFeeder';
   public static GRAVE_REVENANT = 'graveRevenant';
   public static ROYAL_SCARAB = 'royalScarab';
@@ -61,7 +61,7 @@ export class BattleTexture extends Texture {
     return this.renderer.generateTexture(g, {scaleMode: PIXI.SCALE_MODES.LINEAR, resolution: 2});
   }
 
-  get acientFighter(): [PIXI.Texture[], number] {
+  get ancientFighter(): [PIXI.Texture[], number] {
     const baseTexture = PIXI.BaseTexture.from(acientFighter, {scaleMode: SCALE_MODES.NEAREST});
 
     const textures = [];

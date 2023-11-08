@@ -52,16 +52,16 @@ export class StateView extends View {
     this.addChild(this.lifeValueText);
   }
 
-  playTime(percent: number): gsap.core.Timeline {
+  playTime(percent: number, duration: number = 0): gsap.core.Timeline {
     const width = Math.floor(percent / 100 * StateView.TIME_SPRITE_WIDTH);
 
     return gsap.timeline()
       .to(this.timeSprite, {
         pixi: {
-          duration: 0.1,
+          duration,
           width,
         },
-      }, '>')
+      }, '>');
   }
 
   playLife(count: number): gsap.core.Timeline {

@@ -4,9 +4,8 @@
     {
       "on": "start",
       "messages": [
-        "ステージ1",
-        "敵は出現しました！",
-        "ファイアドラゴン　x 3"
+        "ステージ5",
+        "デモンウィッチ　x 1"
       ]
     },
     {
@@ -32,23 +31,23 @@
       "on": "success",
       "messages": [
         "おめでとう",
-        "クリアしました",
-        "次のステージを行きましょ！"
+        "全ステーこクリアしました！",
+        "Thank your playing"
       ]
     }
   ],
   "enemies": [
     {
-      "enemyId": "ancientFighter",
-      "quiz": "あ"
-    },
-    {
-      "enemyId": "ancientFighter",
-      "quiz": "あ"
+      "enemyId": "",
+      "quiz": ""
     },
     {
       "enemyId": "bloodLich",
-      "quiz": "あ"
+      "quiz": ""
+    },
+    {
+      "enemyId": "",
+      "quiz": ""
     }
   ]
 }

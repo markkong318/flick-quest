@@ -7,11 +7,13 @@ import bottle from '../../framework/bottle';
 import {Background} from '../../framework/background';
 import {TouchSprite} from './game/touch-sprite';
 import {BattleView} from "./game/battle-view";
+import {MaskView} from './game/mask-view';
 
 export class GameView extends View {
   private flickerView: FlickerView;
   private battleView: BattleView;
   private touchSprite: TouchSprite;
+  private maskView: MaskView;
 
   constructor() {
     super();
@@ -22,7 +24,7 @@ export class GameView extends View {
 
     this.battleView = bottle.singleton(BattleView);
     this.battleView.size = new Size(this.size.width, 600);
-    this.battleView.background = new Background(PIXI.Texture.WHITE, 0x333333);
+    this.battleView.background = new Background(PIXI.Texture.WHITE, 0x000000);
     this.battleView.y = 0;
     this.battleView.initUI();
     this.addChild(this.battleView);
@@ -39,6 +41,15 @@ export class GameView extends View {
     this.flickerView.y = this.size.height - 300;
     this.flickerView.initUI();
     this.addChild(this.flickerView);
+
+    this.maskView = bottle.singleton(MaskView);
+    this.maskView.size = new Size(this.width, this.height);
+    this.maskView.background = new Background(PIXI.Texture.WHITE, 0x000000);
+    this.maskView.x = this.flickerView.x;
+    this.maskView.y = this.flickerView.y;
+    this.maskView.interactive = true;
+    this.maskView.initUI();
+    this.addChild(this.maskView);
 
     this.touchSprite.setBaseView(this.flickerView);
   }

@@ -10,12 +10,14 @@ export class QuizGroupView extends View {
   private firstTexts: PIXI.Text[] = [];
   private otherTexts: PIXI.Text[] = [];
 
+  private layout: GridLayout;
+
   constructor() {
     super();
   }
 
   public initUI() {
-    const layout = new GridLayout(this, 1, 3, 5, {noResize: true});
+    this.layout = new GridLayout(this, 1, 3, 5, {noResize: true});
 
     for (let i = 0; i < 3; i++) {
       const view = new View();
@@ -40,7 +42,7 @@ export class QuizGroupView extends View {
 
       view.addChild(otherText);
 
-      layout.put(view, 0, i);
+      this.layout.put(view, 0, i);
 
       this.quizTexts.push(view);
       this.firstTexts.push(firstText);
@@ -51,6 +53,8 @@ export class QuizGroupView extends View {
   setQuiz(id: number, text: string) {
     this.firstTexts[id].text = text.charAt(0);
     this.otherTexts[id].text = text.substring(1);
+
+    this.layout.update(this.quizTexts[id], 0, id);
   }
 
   playShow(ids: number | number[]): gsap.core.Timeline {
@@ -66,6 +70,26 @@ export class QuizGroupView extends View {
         pixi: {
           duration: 0.5,
           alpha: 1,
+        },
+      }, '<')
+    }
+
+    return timeline;
+  }
+
+  playHide(ids: number | number[]): gsap.core.Timeline {
+    if (!Array.isArray(ids)) {
+      ids = [ids];
+    }
+
+    const timeline = gsap.timeline();
+
+    for (let i = 0; i < ids.length; i++) {
+      const text = this.quizTexts[ids[i]];
+      timeline.to(text, {
+        pixi: {
+          duration: 0.5,
+          alpha: 0,
         },
       }, '<')
     }

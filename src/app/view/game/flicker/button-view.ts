@@ -4,6 +4,8 @@ import {View} from '../../../../framework/view';
 import {FlickerTexture} from '../../../texture/flicker-texture';
 import bottle from '../../../../framework/bottle';
 import {FloatView} from './float-view';
+import rocket from '../../../../framework/rocket';
+import {EVENT_SEND_KEY} from '../../../env/event';
 
 export class ButtonView extends View {
   private flickerTexture: FlickerTexture = bottle.inject(FlickerTexture);
@@ -118,19 +120,24 @@ export class ButtonView extends View {
 
       if (isHit) {
         console.log('send key:' + this.char);
+        rocket.emit(EVENT_SEND_KEY, this.char);
       } else {
         switch (area) {
           case 2:
             console.log('send key:' + this.floatViews[ButtonView.FLOAT_VIEW_UP]?.getChar());
+            rocket.emit(EVENT_SEND_KEY, this.floatViews[ButtonView.FLOAT_VIEW_UP]?.getChar());
             break;
           case 4:
             console.log('send key:' + this.floatViews[ButtonView.FLOAT_VIEW_LEFT]?.getChar());
+            rocket.emit(EVENT_SEND_KEY, this.floatViews[ButtonView.FLOAT_VIEW_LEFT]?.getChar());
             break;
           case 6:
             console.log('send key:' + this.floatViews[ButtonView.FLOAT_VIEW_RIGHT]?.getChar());
+            rocket.emit(EVENT_SEND_KEY, this.floatViews[ButtonView.FLOAT_VIEW_RIGHT]?.getChar());
             break;
           case 8:
             console.log('send key:' + this.floatViews[ButtonView.FLOAT_VIEW_DOWN]?.getChar());
+            rocket.emit(EVENT_SEND_KEY, this.floatViews[ButtonView.FLOAT_VIEW_DOWN]?.getChar());
             break;
         }
       }
@@ -141,7 +148,6 @@ export class ButtonView extends View {
     // @ts-ignore
     this.on('boardpointerclick', (event) => {
       console.log('boardpointerclick');
-
     });
   }
 

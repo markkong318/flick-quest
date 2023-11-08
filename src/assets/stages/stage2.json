@@ -4,9 +4,8 @@
     {
       "on": "start",
       "messages": [
-        "ステージ1",
-        "敵は出現しました！",
-        "ファイアドラゴン　x 3"
+        "ステージ2",
+        "ゴブリンウォリアー　x 3"
       ]
     },
     {
@@ -39,15 +38,15 @@
   ],
   "enemies": [
     {
-      "enemyId": "ancientFighter",
+      "enemyId": "carcassFeeder",
       "quiz": "あ"
     },
     {
-      "enemyId": "ancientFighter",
+      "enemyId": "carcassFeeder",
       "quiz": "あ"
     },
     {
-      "enemyId": "bloodLich",
+      "enemyId": "carcassFeeder",
       "quiz": "あ"
     }
   ]

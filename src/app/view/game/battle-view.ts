@@ -11,10 +11,8 @@ import {StateView} from './battle/state-view';
 import {MessageView} from './battle/message-view';
 
 export class BattleView extends View {
-  private battleTexture: BattleTexture = bottle.inject(BattleTexture);
+  private battleTexture: BattleTexture;
 
-  // private messageBackgroundSprite: PIXI.Sprite;
-  // private messageText: PIXI.Text;
   private messageView: MessageView;
 
   private enemyGroupView: EnemyGroupView;
@@ -29,29 +27,17 @@ export class BattleView extends View {
   }
 
   public initUI() {
-    bottle.singleton(BattleTexture);
+    this.battleTexture = bottle.singleton(BattleTexture);
 
     this.baseY = (this.height - this.baseHeight) / 2;
 
-    const sp = new PIXI.Sprite(PIXI.Texture.WHITE)
-    sp.x = 0;
-    sp.y = this.baseY;
-    sp.width = this.width;
-    sp.height = this.baseHeight;
-    sp.tint = 0x555555
-    this.addChild(sp)
-
-    // this.messageBackgroundSprite = new PIXI.Sprite(this.battleTexture.messageRoundRect)
-    // this.messageBackgroundSprite.x = (this.width - this.battleTexture.messageRoundRect.width) / 2;
-    // this.messageBackgroundSprite.y = this.baseY;
-    // this.addChild(this.messageBackgroundSprite)
-    //
-    // this.messageText = new PIXI.Text(">>>>>>>>");
-    // this.messageText.x = this.messageBackgroundSprite.x + 15;
-    // this.messageText.y = this.messageBackgroundSprite.y + 15;
-    // this.messageText.style.fontSize = '24px';
-    // this.messageText.style.fill = ['#ffffff']
-    // this.addChild(this.messageText);
+    // const sp = new PIXI.Sprite(PIXI.Texture.WHITE)
+    // sp.x = 0;
+    // sp.y = this.baseY;
+    // sp.width = this.width;
+    // sp.height = this.baseHeight;
+    // sp.tint = 0x555555
+    // this.addChild(sp)
 
     this.messageView = bottle.singleton(MessageView);
     this.messageView.size = new Size(this.size.width, 0);

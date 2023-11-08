@@ -4,9 +4,8 @@
     {
       "on": "start",
       "messages": [
-        "ステージ1",
-        "敵は出現しました！",
-        "ファイアドラゴン　x 3"
+        "ステージ3",
+        "メタルスケルトン　x 3"
       ]
     },
     {
@@ -39,15 +38,15 @@
   ],
   "enemies": [
     {
-      "enemyId": "ancientFighter",
+      "enemyId": "graveRevenant",
       "quiz": "あ"
     },
     {
-      "enemyId": "ancientFighter",
+      "enemyId": "graveRevenant",
       "quiz": "あ"
     },
     {
-      "enemyId": "bloodLich",
+      "enemyId": "graveRevenant",
       "quiz": "あ"
     }
   ]

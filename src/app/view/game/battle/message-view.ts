@@ -21,21 +21,21 @@ export class MessageView extends View {
     this.frameSprite.y = 0;
     this.addChild(this.frameSprite)
 
-    this.messageText = new PIXI.Text(">>>>>>>>");
+    this.messageText = new PIXI.Text('');
     this.messageText.x = this.frameSprite.x + 15;
     this.messageText.y = this.frameSprite.y + 15;
     this.messageText.style.fontFamily = 'jackeyfont';
     this.messageText.style.fontSize = '24px';
-    this.messageText.style.fill = ['#ffffff']
+    this.messageText.style.fill = ['#ffffff'];
     this.addChild(this.messageText);
   }
 
-  playMessage(text: string): gsap.core.Timeline {
+  playMessage(text: string, duration: number = 1.5): gsap.core.Timeline {
     return gsap.timeline()
       .to(
         {},
         {
-          duration: 1.5,
+          duration,
           onStartParams: [this.messageText, text],
           onStart: function (target: PIXI.Text, text: string) {
             target.text = text;
@@ -44,7 +44,7 @@ export class MessageView extends View {
           onComplete: function (target: PIXI.Text) {
             target.text = '';
           }
-        },
-      )
+        }
+      );
   }
 }

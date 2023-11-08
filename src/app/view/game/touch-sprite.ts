@@ -83,7 +83,6 @@ export class TouchSprite extends PIXI.Sprite {
   }
 
   private checkCollision(event) {
-    // console.log(event.data)
     const {x, y} = this.baseView.toLocal(event.global);
 
     for (let i = 0; i < this.views.length; i++) {

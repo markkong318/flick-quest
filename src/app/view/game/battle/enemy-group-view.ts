@@ -82,4 +82,19 @@ export class EnemyGroupView extends View {
 
     return timeline;
   }
+
+  playPause(ids: number | number[]): gsap.core.Timeline {
+    if (!Array.isArray(ids)) {
+      ids = [ids];
+    }
+
+    const timeline = gsap.timeline();
+    for (let i = 0; i < ids.length; i++) {
+      const sprite = this.enemySprites[ids[i]];
+
+      sprite.stop();
+    }
+
+    return timeline;
+  }
 }

@@ -1,4 +1,4 @@
-import * as PIXI from 'pixi.js';
+import gsap from 'gsap';
 
 import {View} from '../../../framework/view';
 import {FlickerTexture} from '../../texture/flicker-texture';
@@ -11,8 +11,6 @@ import {FloatView} from './flicker/float-view';
 export class FlickerView extends View {
   private flickerTexture: FlickerTexture = bottle.inject(FlickerTexture);
   private touchSprite: TouchSprite = bottle.inject(TouchSprite);
-
-  private buttons: PIXI.Sprite[][];
 
   constructor() {
     super();
@@ -164,5 +162,30 @@ export class FlickerView extends View {
     this.touchSprite.register(buttonView18);
     this.touchSprite.register(buttonView19);
     this.touchSprite.register(buttonView20);
+  }
+
+  playShake(): gsap.core.Timeline {
+    const timeline = gsap.timeline();
+
+    const shakeTimeline = gsap.timeline().pause();
+
+    shakeTimeline.to(this, {
+      duration: 0.05,
+      x: '-=40',
+    }).to(this, {
+      duration: 0.05,
+      x: '+=40',
+    });
+
+    return timeline
+      .to(this, {
+        duration: 0.05,
+        x: '+=20',
+      })
+      .add(shakeTimeline.play().repeat(3))
+      .to(this, {
+        duration: 0.05,
+        x: '-=20',
+      });
   }
 }
