@@ -65,6 +65,4 @@ export class BattleView extends View {
     this.stateView.initUI();
     this.addChild(this.stateView);
   }
-
-
 }

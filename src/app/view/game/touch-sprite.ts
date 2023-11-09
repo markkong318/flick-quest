@@ -176,38 +176,6 @@ export class TouchSprite extends PIXI.Sprite {
 
         this.pointerDownViews.delete(view);
       }
-
-
-      // else if (!isMatch || (event.type == 'pointerup' || event.type == 'pointerupoutside' || event.type == 'pointermove')) {
-      //     if (this.pointerDownViews.has(view)) {
-      //         // @ts-ignore
-      //         view.emit('boardpointerup', {});
-      //         this.pointerDownViews.delete(view);
-      //     }
-      // }
-
-      // if (event.type == 'pointerdown' || event.type == 'pointermove') {
-      //     if (x >= view.x && x <= view.x + view.width &&
-      //         y >= view.y && y <= view.y + view.height) {
-      //         if (!this.pointerDownViews.has(view)) {
-      //             // @ts-ignore
-      //             view.emit('boardpointerdown', {});
-      //             this.pointerDownViews.set(view, view);
-      //         }
-      //     } else {
-      //         if (this.pointerDownViews.has(view)) {
-      //             // @ts-ignore
-      //             view.emit('boardpointerup', {});
-      //             this.pointerDownViews.delete(view);
-      //         }
-      //     }
-      // } else if (event.type == 'pointerup' || event.type == 'pointerupoutside') {
-      //     if (this.pointerDownViews.has(view)) {
-      //         // @ts-ignore
-      //         view.emit('boardpointerup', {});
-      //         this.pointerDownViews.delete(view);
-      //     }
-      // }
     }
   }
 }

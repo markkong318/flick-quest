@@ -17,12 +17,6 @@ export class GameApplication extends Application {
   }
 
   public preload(): void {
-    // PIXI.Assets
-    //   .load((loader, resources) => {
-    //     this.onAssetsLoaded();
-    //   });
-    // const texturePromise = PIXI.Assets.load('examples/assets/bunny.png');
-
     this.onAssetsLoaded()
   }
 

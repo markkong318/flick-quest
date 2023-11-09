@@ -7,9 +7,7 @@ import bottle from '../../../../framework/bottle';
 export class FloatView extends View {
   private flickerTexture: FlickerTexture = bottle.inject(FlickerTexture);
 
-  private borderSprite: PIXI.Sprite;
   private roundRectSprite: PIXI.Sprite;
-  private rectSprite: PIXI.Sprite;
   private charText: PIXI.Text;
 
   private char: string

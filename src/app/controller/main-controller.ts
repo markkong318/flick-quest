@@ -107,7 +107,12 @@ export class MainController extends Controller {
 
         for(let i = 0; i < this.gameModel.successEvent.messages.length; i++) {
           const message = this.gameModel.successEvent.messages[i];
-          this.timeline.add(this.messageView.playMessage(message), '>');
+          if (i == this.gameModel.successEvent.messages.length - 1 &&
+            this.gameModel.stageId == this.gameModel.maxStageId - 1) {
+            this.timeline.add(this.messageView.playMessage(message, 300), '>');
+          } else {
+            this.timeline.add(this.messageView.playMessage(message), '>');
+          }
         }
 
         this.gameModel.stageId++;
