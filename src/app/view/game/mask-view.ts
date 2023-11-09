@@ -45,7 +45,6 @@ export class MaskView extends View {
         },
         onStartParams: [this],
         onStart: function (target: View) {
-          console.log('play hide')
           target.interactive = true;
         },
       });
