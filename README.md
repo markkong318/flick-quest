@@ -21,7 +21,7 @@ npm run start
 ```
 go to [http://localhost:1234](http://localhost:1234) in your browser. Done.
 
-DEMO: [https://markkong318.github.io/flick-quest/](https://markkong318.github.io/fruit-park/)
+DEMO: [https://markkong318.github.io/flick-quest/](https://markkong318.github.io/flick-quest/)
 
 # Asset
 Undead asset pack
