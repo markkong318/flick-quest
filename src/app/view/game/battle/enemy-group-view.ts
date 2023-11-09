@@ -94,8 +94,21 @@ export class EnemyGroupView extends View {
     const timeline = gsap.timeline();
     for (let i = 0; i < ids.length; i++) {
       const sprite = this.enemySprites[ids[i]];
+      timeline.call(() => sprite.stop());
+    }
 
-      sprite.stop();
+    return timeline;
+  }
+
+  playResume(ids: number | number[]): gsap.core.Timeline {
+    if (!Array.isArray(ids)) {
+      ids = [ids];
+    }
+
+    const timeline = gsap.timeline();
+    for (let i = 0; i < ids.length; i++) {
+      const sprite = this.enemySprites[ids[i]];
+      timeline.call(() => sprite.play());
     }
 
     return timeline;

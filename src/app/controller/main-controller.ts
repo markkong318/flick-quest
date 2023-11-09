@@ -1,3 +1,4 @@
+import * as PIXI from 'pixi.js';
 import gsap from 'gsap';
 
 import {Controller} from '../../framework/controller';
@@ -14,12 +15,12 @@ import stage2json from '../../assets/stages/stage2.json';
 import stage3json from '../../assets/stages/stage3.json';
 import stage4json from '../../assets/stages/stage4.json';
 import stage5json from '../../assets/stages/stage5.json';
+import configjson from '../../assets/config.json';
 import {GameModel} from '../model/game-model';
 import rocket from '../../framework/rocket';
 import {EVENT_SEND_KEY} from '../env/event';
 import {MaskView} from '../view/game/mask-view';
 import {StateView} from '../view/game/battle/state-view';
-import * as PIXI from 'pixi.js';
 
 export class MainController extends Controller {
   private messageView: MessageView = bottle.inject(MessageView);
@@ -47,26 +48,42 @@ export class MainController extends Controller {
 
   initGame() {
     this.gameModel = new GameModel();
-    this.gameModel.time = 100;
-    this.gameModel.maxTime = 100;
-    this.gameModel.life = 5;
-    this.gameModel.maxStageId = 5;
+    this.gameModel.time = configjson.time;
+    this.gameModel.maxTime = configjson.time;
+    this.gameModel.life = configjson.life;
+    this.gameModel.maxStageId = configjson.maxStageId;
   }
 
   initSendKey() {
     rocket.on(EVENT_SEND_KEY, (key) => {
       if (this.timerId == -1) {
-        console.log('timout, drop');
         return;
       }
 
       const quizs = this.gameModel.quizs;
       const enemyIds = this.gameModel.enemyIds;
 
+      let hitIdx = -1;
       for(let i = 0; i < quizs.length; i++) {
         if (enemyIds[i] != '' && quizs[i].charAt(0) === key) {
           quizs[i] = quizs[i].substring(1);
+          hitIdx = i;
           break;
+        }
+      }
+
+      if (hitIdx == -1) {
+        return;
+      } else {
+        this.quizGroupView.setQuiz(hitIdx, quizs[hitIdx]);
+
+        if (quizs[hitIdx].length == 0) {
+          this.enemyGroupView.playHide(hitIdx);
+
+          for(let j = 0; j < this.gameModel.killEvent.messages.length; j++) {
+            const message = this.gameModel.killEvent.messages[j];
+            this.timeline.add(this.messageView.playMessage(message));
+          }
         }
       }
 
@@ -76,23 +93,12 @@ export class MainController extends Controller {
           continue;
         }
 
-        this.quizGroupView.setQuiz(i, quizs[i]);
-
-        if (quizs[i].length == 0) {
-          this.enemyGroupView.playHide(i);
-
-          for(let i = 0; i < this.gameModel.killEvent.messages.length; i++) {
-            const message = this.gameModel.killEvent.messages[i];
-            this.timeline.add(this.messageView.playMessage(message), '<');
-          }
-
-        } else {
+        if (quizs[i].length != 0) {
           isClear = false;
         }
       }
 
       if (isClear) {
-        console.log('clear')
         this.pauseTimer();
 
         this.timeline
@@ -133,7 +139,6 @@ export class MainController extends Controller {
   }
 
   loadStage(stageId: number) {
-    console.log('loadStage')
     const stageModel = this.stageModels[stageId];
 
     this.gameModel.quizs = [];
@@ -176,8 +181,6 @@ export class MainController extends Controller {
   }
 
   play() {
-    console.log('play')
-
     this.timeline.add(this.stateView.playLife(this.gameModel.life));
 
     for (let i = 0; i < this.gameModel.enemyIds.length; i++) {
@@ -219,7 +222,6 @@ export class MainController extends Controller {
   }
 
   restartTimer() {
-    console.log('restartTimer')
     if (this.timerId != -1) {
       return;
     }
@@ -228,7 +230,6 @@ export class MainController extends Controller {
       this.gameModel.time -= this.gameModel.decrease;
 
       if (this.gameModel.time < 0) {
-        console.log('time < 0')
         this.pauseTimer();
 
         this.timeline.add(this.maskView.playHide());
@@ -252,6 +253,9 @@ export class MainController extends Controller {
             }
           }
         } else {
+          this.timeline
+            .add(this.enemyGroupView.playPause([0, 1, 2]));
+
           for (let i = 0; i < this.gameModel.timeoutEvent.messages.length; i++) {
             const message = this.gameModel.timeoutEvent.messages[i];
             this.timeline.add(this.messageView.playMessage(message), '>');
@@ -265,6 +269,7 @@ export class MainController extends Controller {
               this.restartTimer();
             })
             .add(this.maskView.playShow(), '>')
+            .add(this.enemyGroupView.playResume([0, 1, 2]), '<')
         }
       }
 
@@ -273,13 +278,11 @@ export class MainController extends Controller {
   }
 
   pauseTimer() {
-    console.log('pauseTimer')
     clearInterval(this.timerId);
     this.timerId = -1;
   }
 
   restoreTimer() {
-    console.log('restoreTimer')
     this.gameModel.time = this.gameModel.maxTime;
     this.timeline.add(this.stateView.playTime(this.gameModel.time, 0.5), '>');
   }

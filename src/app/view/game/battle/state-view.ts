@@ -22,7 +22,7 @@ export class StateView extends View {
     this.frameSprite.y = 0;
     this.addChild(this.frameSprite)
 
-    this.timeTitleText = new PIXI.Text("Time:");
+    this.timeTitleText = new PIXI.Text('Time:');
     this.timeTitleText.x = 30;
     this.timeTitleText.y = 20;
     this.timeTitleText.style.fontFamily = 'jackeyfont';
@@ -44,7 +44,7 @@ export class StateView extends View {
     this.lifeTitleText.style.fill = ['#ffffff'];
     this.addChild(this.lifeTitleText);
 
-    this.lifeValueText = new PIXI.Text("♥♥♥♥♥");
+    this.lifeValueText = new PIXI.Text('');
     this.lifeValueText.x = 100;
     this.lifeValueText.y = this.timeTitleText.y + 20;
     this.lifeValueText.style.fontSize = '20px';

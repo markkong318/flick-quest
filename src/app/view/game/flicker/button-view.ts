@@ -10,9 +10,7 @@ import {EVENT_SEND_KEY} from '../../../env/event';
 export class ButtonView extends View {
   private flickerTexture: FlickerTexture = bottle.inject(FlickerTexture);
 
-  private borderSprite: PIXI.Sprite;
   private roundRectSprite: PIXI.Sprite;
-  private rectSprite: PIXI.Sprite;
   private charText: PIXI.Text;
 
   private floatViews: FloatView[] = [];
@@ -33,18 +31,6 @@ export class ButtonView extends View {
   }
 
   initBottle() {
-    // this.borderSprite = new PIXI.Sprite(this.flickerTexture.roundRect);
-    // this.borderSprite.x = 2;
-    // this.borderSprite.y = 4;
-    // this.borderSprite.tint = 0xb2b4b7;
-    // this.addChild(this.borderSprite);
-
-    // this.rectSprite = new PIXI.Sprite(this.flickerTexture.rect);
-    // this.rectSprite.x = 0;
-    // this.rectSprite.y = 0;
-    // this.rectSprite.tint = 0x3d7aee;
-    // this.addChild(this.rectSprite);
-
     this.roundRectSprite = new PIXI.Sprite(this.flickerTexture.roundRect);
     this.roundRectSprite.x = 0;
     this.roundRectSprite.y = 0;
@@ -228,13 +214,6 @@ export class ButtonView extends View {
   }
 
   renderBoardPointerDown() {
-    // this.rectSprite.visible = true;
-    // this.roundRectSprite.visible = false;
-    // this.charText.style.fill = 0x000000;
-
-    // this.rectSprite.texture = this.flickerTexture.leftRoundRect;
-    // this.rectSprite.tint = 0xffffff
-
     this.roundRectSprite.tint = 0xb2b4b7;
   }
 

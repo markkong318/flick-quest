@@ -1,10 +1,10 @@
 {
-  "decrease": 0.2,
+  "decrease": 0.5,
   "events": [
     {
       "on": "start",
       "messages": [
-        "ステージ5",
+        "ステージ5 BOSS",
         "デモンウィッチ　x 1"
       ]
     },
